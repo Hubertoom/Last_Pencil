@@ -1,59 +1,52 @@
 package lastpencil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Game {
     private final Scanner scanner = new Scanner(System.in);
-    private final List<String> playerList = List.of("John", "Jack");
+    private final List<Player> playerList = new ArrayList<>();
     private int numberOfPencils;
 
     public void startGame() {
+        Player john = new JohnThePlayer("John");
+        Player jack = new JackTheBot("Jack");
+        playerList.add(john);
+        playerList.add(jack);
         numberOfPencils = getNumberOfPencils();
         int currentPlayerIndex = setFirstPlayer();
 
         while (numberOfPencils > 0) {
+            Player currentPlayer = playerList.get(currentPlayerIndex);
             System.out.println("|".repeat(numberOfPencils));
-            System.out.printf("%s's turn\n", playerList.get(Math.abs(currentPlayerIndex)));
+            System.out.printf("%s's turn!\n", currentPlayer);
+            int playerMove = currentPlayer.getMove(numberOfPencils);
+
+            // Printing the bot choice into the console, user choice is omitted
+            if (currentPlayer.getName().equals("Jack")) {
+                System.out.println(playerMove);
+            }
+
+            numberOfPencils -= playerMove;
             currentPlayerIndex = 1 - currentPlayerIndex;
-            numberOfPencils -= subtractPencils();
+
             if (numberOfPencils == 0) {
                 System.out.printf("%s won!\n", playerList.get(currentPlayerIndex));
             }
         }
     }
 
-    private int subtractPencils() {
-        int pencilsToSubtract;
-        while (true) {
-            String input = scanner.nextLine();
-            while (!isNumeric(input)) {
-                System.out.println("Possible values: '1', '2' or '3'");
-                input = scanner.nextLine();
-            }
-
-            pencilsToSubtract = Integer.parseInt(input);
-
-            if (pencilsToSubtract < 1 || pencilsToSubtract > 3) {
-                System.out.println("Possible values: '1', '2' or '3'");
-            } else if (numberOfPencils - pencilsToSubtract < 0) {
-                System.out.println("Too many pencils were taken");
-            } else {
-                break;
-            }
-        }
-        return pencilsToSubtract;
-    }
-
     private int setFirstPlayer() {
         System.out.println("Who will be the first (John, Jack):");
         String playerName = scanner.nextLine();
-        while (!playerList.contains(playerName)) {
+
+        while (!playerName.equals("John") && !playerName.equals("Jack")) {
             System.out.println("Choose between 'John' and 'Jack'");
             playerName = scanner.nextLine();
         }
-        return playerList.indexOf(playerName);
+        return playerName.equals("John") ? 0 : 1;
     }
 
     private int getNumberOfPencils() {

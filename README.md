@@ -1,7 +1,7 @@
 # Last Pencil
 
-Hello *John*! 
-Are you ready to face *Jack The Bot* in the *Last Pencil* game?
+Hello *John*! <br/>
+Are you ready to face ***Jack The Bot*** in the *Last Pencil* game? <br/>
 Don't disregard this bot, if you lost your attention for the moment it immediately pushes you into the corner. 
 
 ## Game rules

@@ -2,6 +2,7 @@ package lastpencil;
 
 public class Main {
     public static void main(String[] args) {
-        new Game().startGame();
+        System.out.println("|".repeat(5));
+        System.out.println("Your turn!");
     }
 }

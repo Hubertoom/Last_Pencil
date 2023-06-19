@@ -22,4 +22,4 @@ All stages are done accordingly to the requirements in every stage.
 
 #### Project page: https://hyperskill.org/projects/341
 
-
+![image](https://github.com/Hubertoom/Last_Pencil/assets/137101859/81deafeb-f932-4a90-9e03-c9a90688f647)
